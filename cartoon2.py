@@ -2,13 +2,15 @@
 
 import cv2
 import argparse
+import os
 
 # Create parser
 parser = argparse.ArgumentParser(description="Example script with arguments")
 
 # Default values
-default_filename = "image.jpg"
-default_output = "image_output.jpg" # Default output filename, if --Output is used without a value
+default_filename = "images/image.jpg"
+_, default_output = os.path.split(parser.prog)
+default_output = "images/_" + os.path.splitext(default_output)[0] + "_output.jpg"
 default_show = "yes"
 
 # Add arguments
