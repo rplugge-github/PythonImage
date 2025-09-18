@@ -16,7 +16,8 @@ pip install argparse
 =====
 python cartoon.py --help
 python cartoon.py --filename "C:\Users\rplug\Pictures\Saved Pictures\20220608_134822000_iOS.jpg"
-
+python cartoon.py --show 0 --output
+python cartoon.py --show 1 --output "C:\temp\image_output.jpg"
 =====
 python arguments: python script.py arg1 arg2
 

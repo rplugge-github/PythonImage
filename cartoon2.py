@@ -1,8 +1,6 @@
-#https://www.askpython.com/python/examples/images-into-cartoons
+#https://www.geeksforgeeks.org/blogs/cartooning-an-image-using-opencv-python/
 
 import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 import argparse
 
 # Create parser
@@ -10,7 +8,7 @@ parser = argparse.ArgumentParser(description="Example script with arguments")
 
 # Default values
 default_filename = "image.jpg"
-default_output = parser.prog.replace(".py", "") + "_output.jpg" # Default output filename, if --Output is used without a value
+default_output = "image_output.jpg" # Default output filename, if --Output is used without a value
 default_show = "yes"
 
 # Add arguments
@@ -34,53 +32,24 @@ if img is None:
     print("Image not found")
     exit()
 
-# Convert BGR to RGB
-img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+# Prep grayscale & blur
+g = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+g = cv2.medianBlur(g, 5)
 
-"""
-plt.figure(figsize=(10,10))
-plt.imshow(img)
-plt.axis("off")
-plt.title("Original Image")
-plt.show()
-"""
+# Edges
+e = cv2.adaptiveThreshold(g, 255, cv2.ADAPTIVE_THRESH_MEAN_C,
+                          cv2.THRESH_BINARY, 9, 9)
 
-# Convert to grayscale and apply median blur
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-gray = cv2.medianBlur(gray, 5)
+# Smooth color
+c = cv2.bilateralFilter(img, 9, 250, 250)
 
-"""
-plt.figure(figsize=(10,10))
-plt.imshow(gray,cmap="gray")
-plt.axis("off")
-plt.title("Grayscale Image")
-plt.show()
-"""
-
-# Detect edges using adaptive thresholding
-edges = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 9, 9)
-
-"""
-plt.figure(figsize=(10,10))
-plt.imshow(edges,cmap="gray")
-plt.axis("off")
-plt.title("Edged Image")
-plt.show()
-"""
-
-# Apply bilateral filter to smooth the colors
-color = cv2.bilateralFilter(img, 9, 250, 250)
-cartoon = cv2.bitwise_and(color, color, mask=edges)
-plt.figure(figsize=(10,10))
-plt.imshow(cartoon,cmap="gray")
-plt.axis("off")
-plt.title("Cartoon Image")
-#plt.show()
+# Combine
+cartoon = cv2.bitwise_and(c, c, mask=e)
 
 # Save output if output filename is provided
 # https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imsave.html
 if not args.output is None:
-    plt.imsave(args.output, cartoon,cmap="gray")
+    cv2.imwrite(args.output, cartoon)    
     print(f"Output file saved: {args.output}")
 
 # Show image if show argument is provided
@@ -95,4 +64,7 @@ else:
 
 if show.lower() in ['true', '1', 'yes']:
     print("Show image:", show)
-    plt.show()
+    cv2.imshow("Cartoon", cartoon)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
