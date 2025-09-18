@@ -13,11 +13,17 @@ pip install argparse
   WARNING: The scripts pip.exe, pip3.13.exe and pip3.exe are installed in 'C:\Users\rplug\AppData\Roaming\Python\Python313\Scripts' which is not on PATH.
   WARNING: The scripts fonttools.exe, pyftmerge.exe, pyftsubset.exe and ttx.exe are installed in 'C:\Users\rplug\AppData\Roaming\Python\Python313\Scripts' which is not on PATH
 
+pip install pyautogui --> cartoon3.py met gui
+
 =====
 python cartoon.py --help
 python cartoon.py --filename "C:\Users\rplug\Pictures\Saved Pictures\20220608_134822000_iOS.jpg"
 python cartoon.py --show 0 --output
 python cartoon.py --show 1 --output "C:\temp\image_output.jpg"
+
+python cartoon2.py --help
+
+
 =====
 python arguments: python script.py arg1 arg2
 
@@ -62,3 +68,6 @@ def greet(name, age):
 
 if __name__ == '__main__':
     greet()
+
+====
+https://pyseek.com/2022/09/face-recognition-login-system-using-python/
