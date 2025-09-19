@@ -71,3 +71,27 @@ if __name__ == '__main__':
 
 ====
 https://pyseek.com/2022/09/face-recognition-login-system-using-python/
+
+===
+https://deepai.org/machine-learning-model/text2img
+
+https://deepai.org/dashboard/profile
+
+API-key: 81b9db52-fcc4-4a61-a56c-0ab92d724b28
+
+DeepAI	
+Genereer afbeeldingen op basis van tekst (text-to-image), verschillende stijlen, aanpasbare belichting en kleuren	
+Ja, met een gratis API-sleutel	DeepAI Image Generator
+
+pip install requests
+
+blijkt niet gratis
+
+===
+
+https://subnp.com/free-api
+
+
+
+
+
